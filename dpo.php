@@ -1,6 +1,7 @@
 <?php 
 class dpo_payment extends auth{
     private $ctoken='CBA13EE8-D08E-4F96-8C0D-9DF54D8115D1';
+    private $inactive_ctoken= '';
     private $redir = "http://localhost/dpo_api/verify.php";
     // private 
     function xmlRequest($xml){
