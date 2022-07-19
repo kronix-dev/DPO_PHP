@@ -55,15 +55,14 @@ class dpo_payment extends auth{
           <TransactionToken>'.$d.'</TransactionToken>
         </API3G>';
         $re=$this->xmlRequest($xml);
+        $response = [];
+        $response["status"]=false;
+        
         if($re["Result"]=='000' || $re["Result"]=='001'){
             // Iko Poa
+            $response["status"]=true;
         }
-    }
-    function verifyAll(){
-        $d=$this->select_tbl("votes","*");
-        foreach($d as $a){
-            $this->verifyToken($a["token"]);
-        }
+        return $response;
     }
     function createToken($d){
         $uid=substr(str_shuffle(uniqid().$this->randomizer()),0,10);
