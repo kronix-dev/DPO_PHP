@@ -72,7 +72,7 @@ class dpo_payment extends auth{
         <CompanyToken>'.$this->ctoken.'</CompanyToken>
         <Request>createToken</Request>
         <Transaction>
-        <PaymentAmount>500</PaymentAmount>
+        <PaymentAmount>'.$d["price"].'</PaymentAmount>
         <PaymentCurrency>tzs</PaymentCurrency>
         <CompanyRef>'.$uid.'</CompanyRef>
         <RedirectURL>http://kismatymedia.com/participants/verifyPayment.php</RedirectURL>
@@ -89,7 +89,7 @@ class dpo_payment extends auth{
         </API3G>';
         $x=$this->xmlRequest($xml);
         
-        $this->ins_to_db("votes",["token","cid","vid"],[$x["TransToken"],$d["id"],$x["TransRef"]]);
+        //$this->ins_to_db("votes",["token","cid","vid"],[$x["TransToken"],$d["id"],$x["TransRef"]]);
         // header('location:);
             $response =[];
             $response["transactionToken"] = $x["TransToken"];
