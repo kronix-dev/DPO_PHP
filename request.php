@@ -11,12 +11,14 @@ In Creating Tokens
 arg:"createToken",
 val:value,
 value2: values
+price : 5000
 }
 ***************************
 
 Kama if($json->arg){} ikigoma use if(json["arg"])
 */
 if($json->arg == "createToken"){
+  $dpo->createToken($json);
 }
 else if($json->arg == "verifyToken"){
 }
