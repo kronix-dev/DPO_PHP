@@ -1,6 +1,7 @@
 <?php 
 class dpo_payment extends auth{
     private $ctoken='CBA13EE8-D08E-4F96-8C0D-9DF54D8115D1';
+    private $redir = "http://localhost/dpo_api/verify.php";
     // private 
     function xmlRequest($xml){
                 //The XML string that you want to send.
@@ -55,7 +56,7 @@ class dpo_payment extends auth{
         </API3G>';
         $re=$this->xmlRequest($xml);
         if($re["Result"]=='000' || $re["Result"]=='001'){
-            $this->upd_to_db('votes',"status='paid'","token='$d'");
+            // Iko Poa
         }
     }
     function verifyAll(){
