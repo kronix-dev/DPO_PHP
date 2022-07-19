@@ -65,7 +65,6 @@ class dpo_payment extends auth{
         }
     }
     function createToken($d){
-        $d=$this->select_tbl("contestants","*","id='$d'")[0];
         $uid=substr(str_shuffle(uniqid().$this->randomizer()),0,10);
         $xml = '<?xml version="1.0" encoding="utf-8"?>
         <API3G>
@@ -82,19 +81,18 @@ class dpo_payment extends auth{
         <Services>
           <Service>
             <ServiceType>47029</ServiceType>
-            <ServiceDescription>Vote for '.$d["name"].'</ServiceDescription>
+            <ServiceDescription>'.$d.'</ServiceDescription>
             <ServiceDate>'.date('Y/m/d H:i').'</ServiceDate>
           </Service>
         </Services>
         </API3G>';
         $x=$this->xmlRequest($xml);
-        // print($x);
+        
         $this->ins_to_db("votes",["token","cid","vid"],[$x["TransToken"],$d["id"],$x["TransRef"]]);
         // header('location:);
-        ?>
-        <script type="text/javascript">
-            window.location.href="https://secure.3gdirectpay.com/dpopayment.php?ID=<?php echo $x["TransToken"]?>";
-        </script>
-        <?php
+            $response =[];
+            $response["transactionToken"] = $x["TransToken"];
+            $response["transaction"] = $x;
+            return $response;
     }
 }
